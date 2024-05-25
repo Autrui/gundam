@@ -1,0 +1,42 @@
+/.idea/
+
+# local env files
+intelligent_fire_safety_service_platform.iml
+
+# Log files
+
+
+# Editor directories and files
+gundam-job/target/
+gundam-generator/target/
+logs
+*.bak
+*.iml
+
+# cjsmac
+# Compiled class file
+*.class
+.DS_Store
+# Log file
+*.log
+# BlueJ files
+*.ctxt
+target
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+# Project exclude paths
+/target/
+
+*-cjs.yml
+*-cjs.yaml

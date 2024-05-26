@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: @profiles.active@
+  cloud:
+    nacos:
+      server-addr: ${NACOS_HOST:gundam-nacos}:${NACOS_PORT:8848}
+      discovery:
+        group: @nacos.group@
+        namespace: aaabbef5-866b-419f-92fd-cfcdddeff595
+      config:
+        group: @nacos.group@
+        namespace: aaabbef5-866b-419f-92fd-cfcdddeff595
+        file-extension: yaml
+  config:
+    # import中有optional修饰的配置文件即使没有找到,spring boot也能够正常启动
+    import:
+      - optional:nacos:common.yaml
+      - optional:nacos:${spring.application.name}-${spring.profiles.active}.yaml
+
+dubbo:
+  cloud:
+    subscribed-services: gundam-cus,gundam-ods,gundam-file,gundam-sdc,gundam-iot
+  consumer:
+    cluster: failfast
+    timeout: 30000
+    check: false
+  protocols:
+    dubbo:
+      name: dubbo
+      port: -1
+  registry:
+    #   The Spring Cloud Dubbo's registry extension
+    address: spring-cloud://${NACOS-HOST:ifssc-nacos}:${NACOS-PORT:8848}

@@ -19,12 +19,12 @@
     </modules>
 
     <properties>
-        <gundam.version>${version}</gundam.version>
+        <gundam.version>1.0.0</gundam.version>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>3.0.2</spring.boot.version>
-        <spring.cloud.version>2022.0.0</spring.cloud.version>
-        <spring.cloud.alibaba.version>2022.0.0.0</spring.cloud.alibaba.version>
+        <spring.boot.version>3.2.4</spring.boot.version>
+        <spring.cloud.version>2023.0.1</spring.cloud.version>
+        <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
         <oauth2.version>2.2.5.RELEASE</oauth2.version>
 
         <mysql.version>8.1.0</mysql.version>

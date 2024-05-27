@@ -1,5 +1,6 @@
 package com.autrui;
 
+import com.autrui.security.annotation.EnableCustomConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
@@ -9,6 +10,7 @@ import org.springframework.boot.context.metrics.buffering.BufferingApplicationSt
  * @date 2023/8/1
  * @apiNote
  */
+@EnableCustomConfig
 @SpringBootApplication
 public class JobApplication {
     public static void main(String[] args) {
@@ -17,5 +19,4 @@ public class JobApplication {
         application.run(args);
         System.out.println("(♥◠‿◠)ﾉﾞ  Job启动成功   ლ(´ڡ`ლ)ﾞ  ");
     }
-
 }

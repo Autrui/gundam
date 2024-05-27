@@ -48,5 +48,11 @@
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.autrui</groupId>
+            <artifactId>gundam-common-security</artifactId>
+            <version>${gundam.common.version}</version>
+        </dependency>
     </dependencies>
 </project>

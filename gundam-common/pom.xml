@@ -10,6 +10,7 @@
     <modules>
         <module>gundam-common-util</module>
         <module>gundam-common-data</module>
+        <module>gundam-common-security</module>
     </modules>
 
     <artifactId>gundam-common</artifactId>

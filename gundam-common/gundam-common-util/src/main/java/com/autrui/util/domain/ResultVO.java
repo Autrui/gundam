@@ -3,6 +3,7 @@ package com.autrui.util.domain;
 import com.autrui.util.enums.SystemCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -16,22 +17,23 @@ import java.util.Objects;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ResultVO<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
     private T data;
 
-    private String code;
+    private Integer code;
 
     private String msg;
 
     public static <T> ResultVO<T> success(T data) {
-        ResultVO<T> ok = new ResultVO<>();
-        ok.setCode(SystemCode.SUCCESS.getCode());
-        ok.setMsg(SystemCode.SUCCESS.getDesc());
-        ok.setData(data);
-        return ok;
+        ResultVO<T> success = new ResultVO<>();
+        success.setCode(SystemCode.SUCCESS.getCode());
+        success.setMsg(SystemCode.SUCCESS.getMsg());
+        success.setData(data);
+        return success;
     }
 
     public static ResultVO<Object> result(SystemCode errorCode) {
@@ -51,38 +53,32 @@ public class ResultVO<T> implements Serializable {
     public static <T> ResultVO<T> success() {
         ResultVO ok = new ResultVO();
         ok.setCode(SystemCode.SUCCESS.getCode());
-        ok.setMsg(SystemCode.SUCCESS.getDesc());
+        ok.setMsg(SystemCode.SUCCESS.getMsg());
         ok.setData(true);
         return ok;
     }
 
-
-    public static ResultVO<Boolean> success(Boolean ok, String hintMsg) {
-
+    public static ResultVO<Boolean> success(Boolean isSuccess, String hintMsg) {
         ResultVO<Boolean> ret = new ResultVO<>();
-
-        if (ok) {
+        if (isSuccess) {
             ret.setCode(SystemCode.SUCCESS.getCode());
-            ret.setMsg(SystemCode.SUCCESS.getDesc());
+            ret.setMsg(SystemCode.SUCCESS.getMsg());
         } else {
-
             ret.setCode(SystemCode.BUSINESS_ERROR.getCode());
             ret.setMsg(hintMsg);
         }
-
-        ret.setData(ok);
-
+        ret.setData(isSuccess);
         return ret;
     }
 
     public static <T> ResultVO<T> error(SystemCode errorCode) {
         ResultVO<T> error = new ResultVO<>();
         error.setCode(errorCode.getCode());
-        error.setMsg(errorCode.getDesc());
+        error.setMsg(errorCode.getMsg());
         return error;
     }
 
-    public static <T> ResultVO<T> error(String errorCode, String errorMsg) {
+    public static <T> ResultVO<T> error(Integer errorCode, String errorMsg) {
         ResultVO<T> error = new ResultVO<>();
         error.setCode(errorCode);
         error.setMsg(errorMsg);
@@ -97,18 +93,16 @@ public class ResultVO<T> implements Serializable {
     }
 
     public static <T> ResultVO<T> error(SystemCode errorCode, String... hintMsg) {
-
         ResultVO<T> error = new ResultVO<>();
         error.setCode(errorCode.getCode());
-        error.setMsg(errorCode.getDesc());
-
+        error.setMsg(errorCode.getMsg());
         if (null != hintMsg) {
             try {
                 StringBuilder stringBuilder = new StringBuilder();
                 for (String s : hintMsg) {
                     stringBuilder.append(s);
                 }
-                error.setMsg(MessageFormat.format(errorCode.getDesc(), stringBuilder));
+                error.setMsg(MessageFormat.format(errorCode.getMsg(), stringBuilder));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -116,9 +110,9 @@ public class ResultVO<T> implements Serializable {
 
         return error;
     }
+
     public static <T> ResultVO<T> condition(boolean flag) {
         return flag ? ResultVO.success() : ResultVO.error(SystemCode.FAIL);
     }
-
 
 }

@@ -20,6 +20,7 @@
 
     <properties>
         <gundam.version>1.0.0</gundam.version>
+        <gundam.common.version>1.0.0</gundam.common.version>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.2.4</spring.boot.version>
@@ -27,13 +28,13 @@
         <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
         <spring.boot.admin.version>3.2.3</spring.boot.admin.version>
         <oauth2.version>2.2.5.RELEASE</oauth2.version>
-        <mysql.version>8.1.0</mysql.version>
+        <mysql.version>8.2.0</mysql.version>
         <druid.version>1.2.18</druid.version>
         <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <lombok.version>1.18.20</lombok.version>
+        <lombok.version>1.18.32</lombok.version>
         <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-        <hutool.version>5.8.21</hutool.version>
+        <hutool.version>5.8.25</hutool.version>
         <jasypt.version>3.0.5</jasypt.version>
         <dubbo.version>3.2.12</dubbo.version>
     </properties>

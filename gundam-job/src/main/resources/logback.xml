@@ -39,7 +39,7 @@
     <!-- 2.1 level为 ERROR 日志，时间滚动输出  -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文档的路径及文档名 -->
-        <file>${log.path}/%d{yyyy-MM-dd}.log</file>
+        <fileNamePattern>${log.path}/%d{yyyy-MM-dd}.log</fileNamePattern>
         <!--日志文档输出格式-->
         <encoder>
             <Pattern>${logging.pattern.file}</Pattern>

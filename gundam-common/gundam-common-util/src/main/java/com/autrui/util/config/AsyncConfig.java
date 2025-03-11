@@ -1,5 +1,6 @@
-package com.autrui.security.config;
+package com.autrui.util.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author Autrui
@@ -17,11 +19,13 @@ import java.util.concurrent.Executor;
 // 开启线程异步执行
 @EnableAsync
 @Configuration
+@Slf4j
 public class AsyncConfig implements AsyncConfigurer {
-    private final Logger logger = LoggerFactory.getLogger(AsyncConfig.class);
-    private static final int CORE_POOL_SIZE = 30;
-    private static final int MAX_POOL_SIZE = 30;
-    private static final int QUEUE_CAPACITY = 20;
+
+    private static final int CORE_POOL_SIZE = 5;
+    private static final int MAX_POOL_SIZE = 10;
+    private static final int QUEUE_CAPACITY = 200;
+    private static final int KEEP_ALIVE_SECONDS = 5000;
     private static final String THREAD_NAME_PREFIX = "GUNDAM-THREAD-POOL-";
 
     /**
@@ -31,14 +35,16 @@ public class AsyncConfig implements AsyncConfigurer {
      */
     @Bean(name = "taskExecutor")
     public Executor taskExecutor() {
-        logger.info("初始化线程池开始..................");
+        log.info("初始化线程池开始..................");
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(CORE_POOL_SIZE);
         executor.setMaxPoolSize(MAX_POOL_SIZE);
         executor.setQueueCapacity(QUEUE_CAPACITY);
+        executor.setKeepAliveSeconds(KEEP_ALIVE_SECONDS);
         executor.setThreadNamePrefix(THREAD_NAME_PREFIX);
+        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.initialize();
-        logger.info("初始化线程池完毕，threadPoolName={}, curePoolSize={}, maxPoolSize={}", THREAD_NAME_PREFIX, MAX_POOL_SIZE, MAX_POOL_SIZE);
+        log.info("初始化线程池完毕，threadPoolName={}, curePoolSize={}, maxPoolSize={}", THREAD_NAME_PREFIX, MAX_POOL_SIZE, MAX_POOL_SIZE);
         return executor;
     }
 

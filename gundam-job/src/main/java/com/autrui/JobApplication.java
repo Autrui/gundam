@@ -1,6 +1,6 @@
 package com.autrui;
 
-import com.autrui.security.annotation.EnableCustomConfig;
+import com.autrui.util.annotation.EnableCustomConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;

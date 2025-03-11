@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
  * @date 2023/8/10
  * @apiNote
  */
+@Slf4j
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
     @Resource
@@ -30,12 +32,10 @@ public class GeneratorServiceImpl implements GeneratorService {
 
         // 指定全局配置
         generator.global(new GlobalConfig.Builder()
-
                 .build());
 
         // 生成策略
         generator.strategy(new StrategyConfig.Builder()
-
                 .build());
 
         // 执行生成代码

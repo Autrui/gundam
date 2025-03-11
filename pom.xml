@@ -8,7 +8,7 @@
     <version>1.0.0</version>
 
     <name>gundam</name>
-    <description>general_utility_network_data_access_management</description>
+    <description>Generation Unified Network Digital Automation Management</description>
     <url>https://maven.apache.org</url>
 
     <modules>

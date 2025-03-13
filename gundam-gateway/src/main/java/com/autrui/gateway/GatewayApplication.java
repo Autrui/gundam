@@ -1,8 +1,6 @@
-package com.autrui;
+package com.autrui.gateway;
 
-import com.autrui.config.DataConfig;
 import com.autrui.util.annotation.EnableCustomConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -13,11 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableCustomConfig
 @SpringBootApplication
-public class GeneratorApplication {
-    @Autowired
-    private DataConfig dataConfig;
+public class GatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GeneratorApplication.class);
+        SpringApplication.run(GatewayApplication.class);
     }
 }

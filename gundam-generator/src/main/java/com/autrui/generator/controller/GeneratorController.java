@@ -1,4 +1,4 @@
-package com.autrui.controller;
+package com.autrui.generator.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

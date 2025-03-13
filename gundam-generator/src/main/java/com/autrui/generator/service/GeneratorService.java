@@ -1,4 +1,4 @@
-package com.autrui.service;
+package com.autrui.generator.service;
 
 /**
  * @author Autrui

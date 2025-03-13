@@ -1,4 +1,4 @@
-package com.autrui;
+package com.autrui.job;
 
 import com.autrui.util.annotation.EnableCustomConfig;
 import org.springframework.boot.SpringApplication;

@@ -13,6 +13,7 @@
         <dependency>
             <groupId>com.autrui</groupId>
             <artifactId>gundam-common-data</artifactId>
+            <version>${gundam.version}</version>
         </dependency>
         <dependency>
             <groupId>com.autrui</groupId>

@@ -1,7 +1,7 @@
-package com.autrui.service.impl;
+package com.autrui.generator.service.impl;
 
-import com.autrui.config.DataConfig;
-import com.autrui.service.GeneratorService;
+import com.autrui.generator.config.DataConfig;
+import com.autrui.generator.service.GeneratorService;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.GlobalConfig;

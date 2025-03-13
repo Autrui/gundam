@@ -16,8 +16,6 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author Autrui
  * @date 2024/5/27
  */
-// 开启线程异步执行
-@EnableAsync
 @Configuration
 @Slf4j
 public class AsyncConfig implements AsyncConfigurer {
@@ -42,6 +40,7 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setQueueCapacity(QUEUE_CAPACITY);
         executor.setKeepAliveSeconds(KEEP_ALIVE_SECONDS);
         executor.setThreadNamePrefix(THREAD_NAME_PREFIX);
+        // 放入主线程执行，不直接抛弃任务
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.initialize();
         log.info("初始化线程池完毕，threadPoolName={}, curePoolSize={}, maxPoolSize={}", THREAD_NAME_PREFIX, MAX_POOL_SIZE, MAX_POOL_SIZE);

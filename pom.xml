@@ -16,6 +16,7 @@
         <module>gundam-common</module>
         <module>gundam-job</module>
         <module>gundam-generator</module>
+        <module>gundam-gateway</module>
     </modules>
 
     <properties>
@@ -23,30 +24,26 @@
         <gundam.common.version>1.0.0</gundam.common.version>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>3.2.4</spring.boot.version>
-        <spring.cloud.version>2023.0.1</spring.cloud.version>
-        <spring.cloud.alibaba.version>2023.0.1.0</spring.cloud.alibaba.version>
-        <spring.boot.admin.version>3.2.3</spring.boot.admin.version>
-        <oauth2.version>2.2.5.RELEASE</oauth2.version>
-        <mysql.version>8.2.0</mysql.version>
-        <druid.version>1.2.18</druid.version>
-        <mybatis.plus.version>3.5.3.2</mybatis.plus.version>
+        <spring.boot.version>3.4.0</spring.boot.version>
+        <spring.cloud.version>2024.0.0</spring.cloud.version>
+        <spring.cloud.alibaba.version>2023.0.3.2</spring.cloud.alibaba.version>
+        <oauth2.version>6.4.3</oauth2.version>
+        <mysql.version>9.2.0</mysql.version>
+        <druid.version>1.2.24</druid.version>
+        <mybatis.plus.version>3.5.10.1</mybatis.plus.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.32</lombok.version>
-        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
-        <hutool.version>5.8.25</hutool.version>
+        <maven.compiler.plugin.version>3.14.0</maven.compiler.plugin.version>
+        <hutool.version>5.8.36</hutool.version>
         <jasypt.version>3.0.5</jasypt.version>
-        <dubbo.version>3.2.12</dubbo.version>
+        <dubbo.version>3.3.4</dubbo.version>
+
+        <!-- override dependency version -->
+        <logback.version>1.5.17</logback.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.autrui</groupId>
-                <artifactId>gundam-common-data</artifactId>
-                <version>${gundam.version}</version>
-            </dependency>
-
             <!-- spring boot 依赖 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -74,10 +71,11 @@
 
             <!-- Oauth2 -->
             <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth2</artifactId>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-client</artifactId>
                 <version>${oauth2.version}</version>
             </dependency>
+
             <!-- Spring Security -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -172,8 +170,22 @@
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring.boot.admin.version}</version>
+            <version>${spring.boot.version}</version>
         </dependency>
+
+        <!-- 覆盖logback的依赖配置-->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

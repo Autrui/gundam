@@ -24,8 +24,8 @@
         <gundam.common.version>1.0.0</gundam.common.version>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.boot.version>3.4.0</spring.boot.version>
-        <spring.cloud.version>2024.0.0</spring.cloud.version>
+        <spring.boot.version>3.4.4</spring.boot.version>
+        <spring.cloud.version>2024.0.1</spring.cloud.version>
         <spring.cloud.alibaba.version>2023.0.3.2</spring.cloud.alibaba.version>
         <oauth2.version>6.4.3</oauth2.version>
         <mysql.version>9.2.0</mysql.version>

@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: @artifactId@
-  profiles:
-    active: @profiles.active@
   cloud:
     nacos:
       server-addr: ${NACOS_HOST:gundam-nacos}:${NACOS_PORT:8848}
@@ -33,3 +29,7 @@ dubbo:
   registry:
     #   The Spring Cloud Dubbo's registry extension
     address: spring-cloud://${NACOS-HOST:ifssc-nacos}:${NACOS-PORT:8848}
+
+logstash:
+  open: true            #配置是否开启ELK日志收集
+  ip: 172.31.30.6:5044  #Logstash地址

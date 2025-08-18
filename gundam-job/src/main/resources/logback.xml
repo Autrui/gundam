@@ -22,6 +22,30 @@
     <substitutionProperty name="logging.pattern.file"
                           value="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%thread] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
+    <!-- 通用 Logstash 配置 -->
+    <springProperty scope="context" name="LOGSTASH_ADDRESS" source="logstash.address" defaultValue="127.0.0.1:4560"/>
+    <springProperty scope="context" name="LOGSTASH_OPEN" source="logstash.open" defaultValue="false"/>
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name" defaultValue="gundam"/>
+
+    <!-- Logstash appender -->
+    <if condition='property("LOGSTASH_OPEN").equals("true")'>
+        <then>
+            <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+                <destination>${LOGSTASH_ADDRESS}</destination>
+
+                <!-- 内部自带异步，直接配置队列参数 -->
+                <queueSize>10000</queueSize> <!-- 队列大小 -->
+                <discardingThreshold>500</discardingThreshold> <!-- 丢弃低级别日志 -->
+                <reconnectionDelay>10000</reconnectionDelay> <!-- 断线重连间隔 -->
+
+                <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+                    <fieldNames class="net.logstash.logback.fieldnames.ShortenedFieldNames"/>
+                    <customFields>{"appname":"${APP_NAME}"}</customFields>
+                </encoder>
+            </appender>
+        </then>
+    </if>
+
     <!--1. 输出到控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
@@ -29,7 +53,7 @@
             <level>debug</level>
         </filter>
         <encoder>
-            <Pattern>${logging.pattern.console}</Pattern>
+            <pattern>${logging.pattern.console}</pattern>
             <!-- 设置字符集 -->
             <charset>UTF-8</charset>
         </encoder>
@@ -39,16 +63,16 @@
     <!-- 2.1 level为 ERROR 日志，时间滚动输出  -->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 正在记录的日志文档的路径及文档名 -->
-        <fileNamePattern>${log.path}/%d{yyyy-MM-dd}.log</fileNamePattern>
+        <fileNamePattern>${log.path}/${LOGSTASH_APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>
         <!--日志文档输出格式-->
         <encoder>
-            <Pattern>${logging.pattern.file}</Pattern>
+            <pattern>${logging.pattern.file}</pattern>
             <charset>UTF-8</charset> <!-- 设置字符集 -->
         </encoder>
         <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志归档 -->
-            <fileNamePattern>${log.path}/%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <fileNamePattern>${log.path}/${LOGSTASH_APP_NAME}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -84,6 +108,7 @@
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
+        <appender-ref ref="ASYNC_LOGSTASH"/>
     </root>
 
 </configuration>

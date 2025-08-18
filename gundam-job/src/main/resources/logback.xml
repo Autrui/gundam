@@ -33,15 +33,18 @@
             <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
                 <destination>${LOGSTASH_ADDRESS}</destination>
 
-                <!-- 内部自带异步，直接配置队列参数 -->
-                <queueSize>10000</queueSize> <!-- 队列大小 -->
-                <discardingThreshold>500</discardingThreshold> <!-- 丢弃低级别日志 -->
-                <reconnectionDelay>10000</reconnectionDelay> <!-- 断线重连间隔 -->
-
                 <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
                     <fieldNames class="net.logstash.logback.fieldnames.ShortenedFieldNames"/>
                     <customFields>{"appname":"${APP_NAME}"}</customFields>
                 </encoder>
+            </appender>
+
+            <!-- AsyncAppender 包裹 Logstash -->
+            <appender name="ASYNC_LOGSTASH" class="ch.qos.logback.classic.AsyncAppender">
+                <appender-ref ref="LOGSTASH"/> <!-- 这里是包裹住 LOGSTASH -->
+                <queueSize>10000</queueSize> <!-- 队列最多存 10000 条日志 -->
+                <discardingThreshold>500</discardingThreshold> <!-- 队列满时丢弃 DEBUG 及以下级别日志 -->
+                <neverBlock>true</neverBlock> <!-- 避免阻塞主线程 -->
             </appender>
         </then>
     </if>
